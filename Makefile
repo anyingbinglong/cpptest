@@ -19,7 +19,7 @@ CFLAGS = -W -Wall -ggdb3 -lgmock -lgtest -lpthread -std=c++11
 
 # 将编译生成的目标文件，可执行文件，依赖文件，都放到了build目录下
 DIR_OBJS = build/objs
-DIR_EXES = ./
+DIR_EXES = .
 DIR_DEPS = build/deps
 DIRS = $(DIR_OBJS) $(DIR_EXES) $(DIR_DEPS) 
 
