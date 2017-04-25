@@ -12,19 +12,19 @@ RM = rm
 RMFLAGS = -rf
 
 # 指定编译器
-CC = gcc
+CC = g++
 # （1）根据需要，修改编译选项，例如，项目中使用了pthread线程库，在此处增加-lpthread
 # 此处可以自定义编译选项
-CFLAGS = -W -Wall -ggdb3 -std=c++11
+CFLAGS = -W -Wall -ggdb3 -lgmock -lgtest -lpthread -std=c++11
 
 # 将编译生成的目标文件，可执行文件，依赖文件，都放到了build目录下
 DIR_OBJS = build/objs
-DIR_EXES = build/exes
+DIR_EXES = ./
 DIR_DEPS = build/deps
 DIRS = $(DIR_OBJS) $(DIR_EXES) $(DIR_DEPS) 
 
 # （2）根据需要，修改此处。变量EXE中存放的是最终生成的可执行文件的名字。
-EXE = list1 
+EXE = test 
 EXE := $(addprefix $(DIR_EXES)/, $(EXE))
 
 # （3）根据需要，修改此处
@@ -89,6 +89,8 @@ $(DIRS):
 # 生成可执行文件
 $(EXE): $(DIR_EXES) $(OBJS)
 	$(CC) -o $@ $(filter %.o, $^) $(CFLAGS)
+	@echo "[|===***************===run unit testing===***************===|]"
+	@./$(EXE)
 # 生成目标文件
 $(DIR_OBJS)/%.o: $(DIR_OBJS) %.cpp
 	$(CC) $(INC_DIRS) $(CFLAGS) -o $@ -c $(filter %.cpp, $^)	
@@ -102,4 +104,4 @@ $(DIR_DEPS)/%.dep: $(DEP_DIR_DEPS) %.cpp
 	$(RM) $(RMFLAGS) $@.tmp
 
 clean:
-	$(RM) $(RMFLAGS) build
+	$(RM) $(RMFLAGS) build $(EXE)
