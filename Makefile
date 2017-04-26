@@ -89,7 +89,7 @@ $(DIRS):
 # 生成可执行文件
 $(EXE): $(DIR_EXES) $(OBJS)
 	$(CC) -o $@ $(filter %.o, $^) $(CFLAGS)
-	@echo "[|===***************===run unit testing===***************===|]"
+	@echo "\33[34;1m [|===***************===run unit testing===***************===|]"
 	@./$(EXE)
 # 生成目标文件
 $(DIR_OBJS)/%.o: $(DIR_OBJS) %.cpp
