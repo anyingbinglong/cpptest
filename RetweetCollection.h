@@ -1,10 +1,14 @@
 #ifndef _RETWEETCOLLECTION_H_
 #define _RETWEETCOLLECTION_H_ 
 
+#include "Tweet.h"
+
 class RetweetCollection 
 {
 public:
-	RetweetCollection() = default;
+	RetweetCollection():
+		size_(0)
+	{}
 	~RetweetCollection() = default;
 	
 	bool isEmpty() const
@@ -16,6 +20,13 @@ public:
 	{
 		return 0;
 	}
+
+	void add(const Tweet& tweet)
+	{
+		size_++;
+	}
+private:
+	unsigned int size_;
 };
 
 #endif
